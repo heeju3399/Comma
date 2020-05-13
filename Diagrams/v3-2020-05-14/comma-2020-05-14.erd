@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="comma-2020-05-14.erd">
+	<entities>
+		<data-source id="mysql5-172105a18cd-3877803bbffc1220">
+			<entity id="1" name="tbl_comment" fq-name="comma.tbl_comment" order="0" x="20" y="645">
+				<path name="comma"/>
+			</entity>
+			<entity id="2" name="tbl_heart" fq-name="comma.tbl_heart" order="1" x="20" y="506">
+				<path name="comma"/>
+			</entity>
+			<entity id="3" name="tbl_member" fq-name="comma.tbl_member" order="2" x="615" y="504">
+				<path name="comma"/>
+			</entity>
+			<entity id="4" name="tbl_playlog" fq-name="comma.tbl_playlog" order="3" x="20" y="182">
+				<path name="comma"/>
+			</entity>
+			<entity id="5" name="tbl_rating" fq-name="comma.tbl_rating" order="4" x="20" y="20">
+				<path name="comma"/>
+			</entity>
+			<entity id="6" name="tbl_song" fq-name="comma.tbl_song" order="5" x="556" y="103">
+				<path name="comma"/>
+			</entity>
+			<entity id="7" name="tbl_tag" fq-name="comma.tbl_tag" order="6" x="20" y="344">
+				<path name="comma"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="FK_tbl_comment_tbl_member" fq-name="comma.tbl_comment.FK_tbl_comment_tbl_member" type="fk" pk-ref="3" fk-ref="1"/>
+		<relation name="FK_tbl_heart_tbl_member" fq-name="comma.tbl_heart.FK_tbl_heart_tbl_member" type="fk" pk-ref="3" fk-ref="2"/>
+		<relation name="FK_tbl_play_log_tbl_member" fq-name="comma.tbl_playlog.FK_tbl_play_log_tbl_member" type="fk" pk-ref="3" fk-ref="4"/>
+		<relation name="FK_tbl_rating_tbl_member" fq-name="comma.tbl_rating.FK_tbl_rating_tbl_member" type="fk" pk-ref="3" fk-ref="5"/>
+		<relation name="FK_tbl_tag_tbl_member" fq-name="comma.tbl_tag.FK_tbl_tag_tbl_member" type="fk" pk-ref="3" fk-ref="7"/>
+		<relation name="FK_tbl_heart_tbl_song" fq-name="comma.tbl_heart.FK_tbl_heart_tbl_song" type="fk" pk-ref="6" fk-ref="2"/>
+		<relation name="FK_tbl_play_log_tbl_song" fq-name="comma.tbl_playlog.FK_tbl_play_log_tbl_song" type="fk" pk-ref="6" fk-ref="4"/>
+		<relation name="FK_tbl_rating_tbl_song" fq-name="comma.tbl_rating.FK_tbl_rating_tbl_song" type="fk" pk-ref="6" fk-ref="5"/>
+		<relation name="FK1" fq-name="comma.tbl_tag.FK1" type="fk" pk-ref="6" fk-ref="7"/>
+	</relations>
+</diagram>
