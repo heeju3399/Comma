@@ -1,0 +1,8 @@
+.dbeaver
+.git
+.metadata
+.settings
+build
+lib
+.classpath
+.project
