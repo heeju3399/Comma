@@ -1,2 +1,3 @@
 ##### comma-mysql-erd-v4-2020-05-14
-![resources/image/database/v4-2020-05-14/comma.png](resources/image/database/v4-2020-05-14/comma.png)
+![Scripts\v4-2020-05-14](Scripts\v4-2020-05-14/comma.png)
+![Scripts\v4-2020-05-14(Scripts\v4-2020-05-14/comma-expand.png)
