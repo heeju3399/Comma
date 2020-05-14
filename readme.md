@@ -1,2 +1,2 @@
-##### comma-mysql-erd-v3-2020-05-14
-![resources/image/database/v3-2020-05-14/erd.png](resources/image/database/v3-2020-05-14/erd.png)
+##### comma-mysql-erd-v4-2020-05-14
+![resources/image/database/v4-2020-05-14/comma.png](resources/image/database/v4-2020-05-14/comma.png)
