@@ -1,4 +1,4 @@
-package bean;
+package unused;
 
 import java.util.HashMap;
 import java.util.Map;
