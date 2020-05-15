@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="comma.erd">
+	<entities>
+		<data-source id="mysql5-172105a18cd-3877803bbffc1220">
+			<entity id="1" name="tbl_comment" fq-name="comma.tbl_comment" order="0" x="442" y="1262">
+				<path name="comma"/>
+			</entity>
+			<entity id="2" name="tbl_heart" fq-name="comma.tbl_heart" order="1" x="485" y="805">
+				<path name="comma"/>
+			</entity>
+			<entity id="3" name="tbl_member" fq-name="comma.tbl_member" order="2" x="358" y="1026">
+				<path name="comma"/>
+			</entity>
+			<entity id="4" name="tbl_playlog" fq-name="comma.tbl_playlog" order="3" x="1851" y="1267">
+				<path name="comma"/>
+			</entity>
+			<entity id="5" name="tbl_song" fq-name="comma.tbl_song" order="4" x="2229" y="1267">
+				<path name="comma"/>
+			</entity>
+			<entity id="6" name="tbl_tag" fq-name="comma.tbl_tag" order="5" x="2761" y="1267">
+				<path name="comma"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="FK_tbl_comment_tbl_member" fq-name="comma.tbl_comment.FK_tbl_comment_tbl_member" type="fk" pk-ref="3" fk-ref="1"/>
+		<relation name="FK_tbl_heart_tbl_member" fq-name="comma.tbl_heart.FK_tbl_heart_tbl_member" type="fk" pk-ref="3" fk-ref="2"/>
+		<relation name="FK_tbl_playlog_tbl_member" fq-name="comma.tbl_playlog.FK_tbl_playlog_tbl_member" type="fk" pk-ref="3" fk-ref="4"/>
+		<relation name="FK_tbl_song_tbl_member" fq-name="comma.tbl_song.FK_tbl_song_tbl_member" type="fk" pk-ref="3" fk-ref="5"/>
+		<relation name="FK_tbl_tag_tbl_member" fq-name="comma.tbl_tag.FK_tbl_tag_tbl_member" type="fk" pk-ref="3" fk-ref="6"/>
+		<relation name="FK_tbl_comment_tbl_song" fq-name="comma.tbl_comment.FK_tbl_comment_tbl_song" type="fk" pk-ref="5" fk-ref="1"/>
+		<relation name="FK_tbl_heart_tbl_song" fq-name="comma.tbl_heart.FK_tbl_heart_tbl_song" type="fk" pk-ref="5" fk-ref="2"/>
+		<relation name="FK_tbl_playlog_tbl_song" fq-name="comma.tbl_playlog.FK_tbl_playlog_tbl_song" type="fk" pk-ref="5" fk-ref="4"/>
+		<relation name="FK_tbl_tag_tbl_song" fq-name="comma.tbl_tag.FK_tbl_tag_tbl_song" type="fk" pk-ref="5" fk-ref="6"/>
+	</relations>
+</diagram>

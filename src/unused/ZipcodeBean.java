@@ -1,4 +1,4 @@
-package bean;
+package unused;
 
 public class ZipcodeBean {
 
