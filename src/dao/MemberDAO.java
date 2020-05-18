@@ -1,4 +1,4 @@
-package service;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 
 import model.Member;
 
-public class MemberMgr {
+public class MemberDAO {
 
-	private DBConnectionMgr pool;
+	private DatabaseDAO pool;
 	
-	public MemberMgr() {
-		pool = DBConnectionMgr.getInstance();
+	public MemberDAO() {
+		pool = DatabaseDAO.getInstance();
 	}
 	
 	//ID 중복확인
@@ -65,7 +65,7 @@ public class MemberMgr {
 	}
 	
 	//로그인
-	public int loginMember(String id, String pwd) {
+	public int signIn(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -82,9 +82,9 @@ public class MemberMgr {
 			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
 			if (rs.next())
-				mode = 2;//???
+				mode = 2;//pass
 			else
-				mode = 1;//???
+				mode = 1;//id true, pass fail
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("멤버로그인 에러"+e);
@@ -153,6 +153,7 @@ public class MemberMgr {
 		}
 		return flag;
 	}
+
 	
 	///admin mode/////////////관리자 페이지
 //	public Vector<Member> getMemberList() {

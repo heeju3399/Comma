@@ -1,4 +1,4 @@
-package service;
+package dao;
 
 /**
  * Copyright(c) 2001 iSavvix Corporation (http://www.isavvix.com/)
@@ -40,7 +40,7 @@ import java.util.Vector;
  *
  * @author  Anil Hemrajani
  */
-public class DBConnectionMgr {
+public class DatabaseDAO {
     private Vector connections = new Vector(10);
     private String _driver = "org.gjt.mm.mysql.Driver",
     _url = "jdbc:mysql://127.0.0.1:3306/mydb?useUnicode=true&characterEncoding=EUC_KR",
@@ -50,20 +50,20 @@ public class DBConnectionMgr {
     private boolean _traceOn = false;
     private boolean initialized = false;
     private int _openConnections = 50;
-    private static DBConnectionMgr instance = null;
+    private static DatabaseDAO instance = null;
 
-    public DBConnectionMgr() {
+    public DatabaseDAO() {
     }
 
     /** Use this method to set the maximum number of open connections before
      unused connections are closed.
      */
 
-    public static DBConnectionMgr getInstance() {
+    public static DatabaseDAO getInstance() {
         if (instance == null) {
-            synchronized (DBConnectionMgr.class) {
+            synchronized (DatabaseDAO.class) {
                 if (instance == null) {
-                    instance = new DBConnectionMgr();
+                    instance = new DatabaseDAO();
                 }
             }
         }
