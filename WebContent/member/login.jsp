@@ -5,7 +5,7 @@
  
 </head>
 <body bgcolor="#996600" topmargin="100">
-
+ 
 <form method="post" action="loginProc.jsp">
 <table width="75%" align="center" bgcolor="#FFFF99">
 	<tr bordercolor="#FFFF99">  
