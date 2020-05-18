@@ -1,4 +1,4 @@
-33package model;
+package model;
 
 public class Comment {
 	private int c_id;
