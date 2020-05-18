@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import server.MemberService;
+import service.MemberService;
 
 @WebServlet("/sign_in")
 public class SignInController extends HttpServlet {
@@ -20,8 +20,8 @@ public class SignInController extends HttpServlet {
 		// request->get parameter pwd
 		String id = "";
 		String pwd = "";
-		int signInState = memberService.signIn(id, pwd);
 		
+		int signInState = memberService.signIn(id, pwd);
 	}
 
 }
