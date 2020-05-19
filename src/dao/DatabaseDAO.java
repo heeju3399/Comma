@@ -43,7 +43,7 @@ import java.util.Vector;
 public class DatabaseDAO {
     private Vector connections = new Vector(10);
     private String _driver = "org.gjt.mm.mysql.Driver",
-    _url = "jdbc:mysql://127.0.0.1:3306/mydb?useUnicode=true&characterEncoding=EUC_KR",
+    _url = "jdbc:mysql://127.0.0.1:3306/comma?useUnicode=true&characterEncoding=EUC_KR",
     _user = "root",
     _password = "1234";
     

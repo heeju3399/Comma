@@ -45,15 +45,14 @@ public class MemberDAO {
 		try {
 			con = pool.getConnection();
 			sql = " insert tbl_member(m_id,m_pwd,m_email,m_birth, "
-					+ " m_visited,m_auth) "
-					+ " values(?,?,?,?,now(),?) ";
+					+ " m_visited) "
+					+ " values(?,?,?,?,now()) ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getM_id());
 			pstmt.setString(2, bean.getM_pwd());
 			pstmt.setString(3, bean.getM_email());
 			pstmt.setString(4, bean.getM_birth());
-			pstmt.setString(5, bean.getM_visited());
-			pstmt.setString(6, bean.getM_auth());
+			
 			if(pstmt.executeUpdate()==1) flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();

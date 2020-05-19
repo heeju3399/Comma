@@ -1,12 +1,12 @@
 <%@page contentType="text/html;charset=EUC-KR"%>
+<% request.setCharacterEncoding("EUC-KR");%>
 <html>
 <head>
-<title>login</title>
- 
+<title>·Î±×ÀÎ</title> 
+
 </head>
 <body bgcolor="#996600" topmargin="100">
- 
-<form method="post" action="loginProc.jsp">
+<form method="post" action="../sign_in">
 <table width="75%" align="center" bgcolor="#FFFF99">
 	<tr bordercolor="#FFFF99">  
 	<td height="190">
@@ -16,11 +16,11 @@
 		</tr>
 		<tr  align="center"> 
 			<td width="47%">ID</td>
-			<td width="53%"><input name="id" value="aaa"></td>
+			<td width="53%"><input name="m_id" value="aaa"></td>
 		</tr>
 		<tr> 
 			<td align="center">Password</td>
-			<td align="center"><input name="pwd" value="1234"></td>
+			<td align="center"><input name="m_pwd" value="1234"></td>
 		</tr>
 		<tr> 
 			<td colspan="2" align="center"><input type="submit" value="login">
