@@ -2,7 +2,9 @@ package service;
 
 import dao.MemberDAO;
 import model.Member;
-
+/**
+ * @Author : Choi
+ * */
 public class MemberService {
 	public int signIn(String id, String pwd) {
 		MemberDAO memberDao = new MemberDAO();

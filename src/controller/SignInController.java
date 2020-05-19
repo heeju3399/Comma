@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MemberDAO;
-import server.MemberService;
+
 @WebServlet("/sign_in")
 public class SignInController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

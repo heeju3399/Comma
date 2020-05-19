@@ -12,7 +12,7 @@ import javafx.beans.property.SetProperty;
 import model.Member;
 
 @WebServlet("/sign_up")
-public class Sign_up_Controller extends HttpServlet {
+public class SignUpController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class Sign_up_Controller extends HttpServlet {
 		bean.setM_birth(request.getParameter("birthday"));
 		bean.setM_email(request.getParameter("email"));
 					
-		boolean result = dao.insertMember(bean);
+		int result = dao.signUp(bean);
 		System.out.println(result);
 	}
 

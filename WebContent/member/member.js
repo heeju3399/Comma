@@ -1,11 +1,11 @@
 function loginCheck(){
 	if(document.login.id.value==""){
-		alert("¾ÆÀÌµð¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 		document.login.id.focus();
 		return;
 	}
 	if(document.login.pwd.value==""){
-		alert("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 		document.login.pwd.focus();
 		return;
 	}
@@ -18,32 +18,32 @@ function memberReg(){
 
 function inputCheck(){
 	if(document.regForm.id.value==""){
-		alert("¾ÆÀÌµð¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 		document.regForm.id.focus();
 		return;
 	}
 	if(document.regForm.pwd.value==""){
-		alert("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 		document.regForm.pwd.focus();
 		return;
 	}
 	if(document.regForm.repwd.value==""){
-		alert("ºñ¹Ð¹øÈ£¸¦ È®ÀÎÇØ ÁÖ¼¼¿ä");
+		alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ ì£¼ì„¸ìš”");
 		document.regForm.repwd.focus();
 		return;
 	}
 	if(document.regForm.pwd.value != document.regForm.repwd.value){
-		alert("ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+		alert("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		document.regForm.repwd.focus();
 		return;
 	}
 	if(document.regForm.birthday.value==""){
-		alert("»ý³â¿ùÀÏ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ìƒë…„ì›”ì¼ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 		document.regForm.birthday.focus();
 		return;
 	}	
 	if(document.regForm.email.value==""){
-		alert("ÀÌ¸ÞÀÏÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ì´ë©”ì¼ì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 		document.regForm.email.focus();
 		return;
 	}
@@ -58,14 +58,14 @@ function inputCheck(){
 	   dotPos > 3 && spacePos == -1 && commaPos == -1 
 	   && atPos + 1 < dotPos && dotPos + 1 < eMailSize);
     else {
-          alert('E-mailÁÖ¼Ò Çü½ÄÀÌ Àß¸øµÇ¾ú½À´Ï´Ù.\n\r´Ù½Ã ÀÔ·ÂÇØ ÁÖ¼¼¿ä!');
+          alert('E-mailì£¼ì†Œ í˜•ì‹ì´ ìž˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.\n\rë‹¤ì‹œ ìž…ë ¥í•´ ì£¼ì„¸ìš”!');
 	      document.regForm.email.focus();
 		  return;
     }
 }
 function idCheck(id){
 	if(id == ""){
-		alert("¾ÆÀÌµð¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 		document.regForm.id.focus();
 	}else{
 		url="idCheck.jsp?id=" + id;

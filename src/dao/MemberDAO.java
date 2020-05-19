@@ -14,8 +14,7 @@ public class MemberDAO {
 		pool = DatabaseDAO.getInstance();
 	}
 
-	// ID 중복확인
-	public boolean checkId(String id) {
+		public boolean checkId(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -26,8 +25,8 @@ public class MemberDAO {
 			sql = "select m_id from tblMember where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();// sql문 실행
-			flag = rs.next();// true이면 중복, false 중복아님.
+			rs = pstmt.executeQuery();
+			flag = rs.next();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -36,44 +35,36 @@ public class MemberDAO {
 		return flag;
 	}
 
-	// 회원가입
+	
 	public int signUp(Member member) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		int state = -1;
+		
 		try {
 			con = pool.getConnection();
-			sql = " insert tbl_member(m_id,m_pwd,m_email,m_birth, "
-					+ " m_visited) "
-					+ " values(?,?,?,?,now()) ";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bean.getM_id());
-			pstmt.setString(2, bean.getM_pwd());
-			pstmt.setString(3, bean.getM_email());
-			pstmt.setString(4, bean.getM_birth());
 			
-			if(pstmt.executeUpdate()==1) flag = true;
-			sql = " insert tbl_member(m_id,m_pwd,m_email,m_birth, " + " m_visited,m_auth) "
-					+ " values(?,?,?,?,now(),?) ";
+			sql = " insert tbl_member(m_id,m_pwd,m_email,m_birth,m_visited,m_auth) "
+					+ " values(?,?,?,?,now()) ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member.getM_id());
 			pstmt.setString(2, member.getM_pwd());
 			pstmt.setString(3, member.getM_email());
 			pstmt.setString(4, member.getM_birth());
-			pstmt.setString(5, member.getM_visited());
-			pstmt.setString(6, member.getM_auth());
+			
+			
 			state = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("멤버인서트에러" + e);
+			
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
 		return state;
 	}
 
-	// 로그인
+	// 濡쒓렇�씤
 	public int signIn(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -96,14 +87,14 @@ public class MemberDAO {
 				state = 1;// id true, pass fail
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("멤버로그인 에러" + e);
+			System.out.println("硫ㅻ쾭濡쒓렇�씤 �뿉�윭" + e);
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return state;
 	}
 
-	// 회원정보 가져오기//관리자 페이지?????
+	// �쉶�썝�젙蹂� 媛��졇�삤湲�//愿�由ъ옄 �럹�씠吏�?????
 	public Member getMember(String id) {
 
 		Connection con = null;
@@ -134,7 +125,7 @@ public class MemberDAO {
 		return bean;
 	}
 
-	// 회원정보 수정
+	// �쉶�썝�젙蹂� �닔�젙
 	public boolean updateMember(Member bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -161,7 +152,7 @@ public class MemberDAO {
 		return flag;
 	}
 
-	/// admin mode/////////////관리자 페이지
+	/// admin mode/////////////愿�由ъ옄 �럹�씠吏�
 //		public Vector<Member> getMemberList() {
 //			Connection con = null;
 //			PreparedStatement pstmt = null;
@@ -218,7 +209,7 @@ public class MemberDAO {
 //		public void sendAccount(String id) {
 //			Member bean = getMember(id);
 //			String pwd = bean.getPwd();
-//			String title = "OOO.com에서 아이디와 비밀번호 전송합니다.";
+//			String title = "OOO.com�뿉�꽌 �븘�씠�뵒�� 鍮꾨�踰덊샇 �쟾�넚�빀�땲�떎.";
 //			String content = "<font color='red'><b>id : " + id; 
 //			content+= " / pwd : " + pwd+"</b></font>";
 //			String toEmail = bean.getEmail();
