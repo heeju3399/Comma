@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.MemberDAO;
 import server.MemberService;
-
 @WebServlet("/sign_in")
 public class SignInController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDAO mgr = new MemberDAO();
 		String id = request.getParameter("m_id");

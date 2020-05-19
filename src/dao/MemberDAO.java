@@ -9,25 +9,25 @@ import model.Member;
 public class MemberDAO {
 
 	private DatabaseDAO pool;
-	
+
 	public MemberDAO() {
 		pool = DatabaseDAO.getInstance();
 	}
-	
-	//ID Áßº¹È®ÀÎ
+
+	// ID ì¤‘ë³µí™•ì¸
 	public boolean checkId(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		boolean flag  = false;
+		boolean flag = false;
 		try {
 			con = pool.getConnection();
 			sql = "select m_id from tblMember where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();//sql¹® ½ÇÇà
-			flag = rs.next();//trueÀÌ¸é Áßº¹, false Áßº¹¾Æ´Ô.
+			rs = pstmt.executeQuery();// sqlë¬¸ ì‹¤í–‰
+			flag = rs.next();// trueì´ë©´ ì¤‘ë³µ, false ì¤‘ë³µì•„ë‹˜.
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -35,13 +35,13 @@ public class MemberDAO {
 		}
 		return flag;
 	}
-	
-	//È¸¿ø°¡ÀÔ
-	public boolean insertMember(Member bean) {
+
+	// íšŒì›ê°€ì…
+	public int signUp(Member member) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
-		boolean flag = false;
+		int state = -1;
 		try {
 			con = pool.getConnection();
 			sql = " insert tbl_member(m_id,m_pwd,m_email,m_birth, "
@@ -54,26 +54,36 @@ public class MemberDAO {
 			pstmt.setString(4, bean.getM_birth());
 			
 			if(pstmt.executeUpdate()==1) flag = true;
+			sql = " insert tbl_member(m_id,m_pwd,m_email,m_birth, " + " m_visited,m_auth) "
+					+ " values(?,?,?,?,now(),?) ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getM_id());
+			pstmt.setString(2, member.getM_pwd());
+			pstmt.setString(3, member.getM_email());
+			pstmt.setString(4, member.getM_birth());
+			pstmt.setString(5, member.getM_visited());
+			pstmt.setString(6, member.getM_auth());
+			state = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("¸â¹öÀÎ¼­Æ®¿¡·¯"+e);
+			System.out.println("ë©¤ë²„ì¸ì„œíŠ¸ì—ëŸ¬" + e);
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
-		return flag;
+		return state;
 	}
-	
-	//·Î±×ÀÎ
+
+	// ë¡œê·¸ì¸
 	public int signIn(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		int mode = 0;
+		int state = 0;
 		// 0-id false, 1-id true pass-false, 2-id&pass true
 		try {
 			if (!checkId(id))
-				return mode;
+				return state;
 			con = pool.getConnection();
 			sql = "select id, pwd from tbl_Member where m_id = ? and m_pwd = ?";
 			pstmt = con.prepareStatement(sql);
@@ -81,22 +91,21 @@ public class MemberDAO {
 			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
 			if (rs.next())
-				mode = 2;//pass
+				state = 2;// pass
 			else
-				mode = 1;//id true, pass fail
+				state = 1;// id true, pass fail
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("¸â¹ö·Î±×ÀÎ ¿¡·¯"+e);
+			System.out.println("ë©¤ë²„ë¡œê·¸ì¸ ì—ëŸ¬" + e);
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		return mode;
+		return state;
 	}
-	
-	
-	//È¸¿øÁ¤º¸ °¡Á®¿À±â//°ü¸®ÀÚ ÆäÀÌÁö?????
+
+	// íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°//ê´€ë¦¬ì í˜ì´ì§€?????
 	public Member getMember(String id) {
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -108,14 +117,14 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				bean.setM_id(rs.getString("m_id")); 
+			if (rs.next()) {
+				bean.setM_id(rs.getString("m_id"));
 				bean.setM_pwd(rs.getString("m_pwd"));
 				bean.setM_email(rs.getString("m_email"));
 				bean.setM_birth(rs.getString("m_birth"));
 				bean.setM_visited(rs.getString("m_visited"));
 				bean.setM_auth(rs.getString("m_auth"));
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -124,8 +133,8 @@ public class MemberDAO {
 		}
 		return bean;
 	}
-	
-	//È¸¿øÁ¤º¸ ¼öÁ¤
+
+	// íšŒì›ì •ë³´ ìˆ˜ì •
 	public boolean updateMember(Member bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -133,17 +142,16 @@ public class MemberDAO {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = " update tbl_member set m_pwd=?, m_email=?, m_birth=?, "
-					+ " m_auth=? where id=? ";
-					
+			sql = " update tbl_member set m_pwd=?, m_email=?, m_birth=?, " + " m_auth=? where id=? ";
+
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getM_pwd());
 			pstmt.setString(2, bean.getM_email());
 			pstmt.setString(3, bean.getM_birth());
 			pstmt.setString(4, bean.getM_auth());
 			pstmt.setString(5, bean.getM_id());
-			
-			if(pstmt.executeUpdate()==1)
+
+			if (pstmt.executeUpdate() == 1)
 				flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,75 +161,68 @@ public class MemberDAO {
 		return flag;
 	}
 
-	
-	///admin mode/////////////°ü¸®ÀÚ ÆäÀÌÁö
-//	public Vector<Member> getMemberList() {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = null;
-//		Vector<Member> vlist = new Vector<>();
-//		try {
-//			con = pool.getConnection();
-//			sql = "select * from tblMember";
-//			pstmt = con.prepareStatement(sql);
-//			rs = pstmt.executeQuery();
-//			while (rs.next()) {
-//				Member bean = new Member();
-//				bean.setId(rs.getString("id"));
-//				bean.setPwd(rs.getString("pwd"));
-//				bean.setName(rs.getString("name"));
-//				bean.setGender(rs.getString("gender"));
-//				bean.setBirthday(rs.getString("birthday"));
-//				bean.setEmail(rs.getString("email"));
-//				vlist.addElement(bean);
+	/// admin mode/////////////ê´€ë¦¬ì í˜ì´ì§€
+//		public Vector<Member> getMemberList() {
+//			Connection con = null;
+//			PreparedStatement pstmt = null;
+//			ResultSet rs = null;
+//			String sql = null;
+//			Vector<Member> vlist = new Vector<>();
+//			try {
+//				con = pool.getConnection();
+//				sql = "select * from tblMember";
+//				pstmt = con.prepareStatement(sql);
+//				rs = pstmt.executeQuery();
+//				while (rs.next()) {
+//					Member bean = new Member();
+//					bean.setId(rs.getString("id"));
+//					bean.setPwd(rs.getString("pwd"));
+//					bean.setName(rs.getString("name"));
+//					bean.setGender(rs.getString("gender"));
+//					bean.setBirthday(rs.getString("birthday"));
+//					bean.setEmail(rs.getString("email"));
+//					vlist.addElement(bean);
+//				}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			} finally {
+//				pool.freeConnection(con, pstmt, rs);
 //			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			pool.freeConnection(con, pstmt, rs);
+//			return vlist;
 //		}
-//		return vlist;
-//	}
-//	
-//	//Admin Login
-//	public boolean adminCheck(String admin_id, String admin_pwd) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = null;
-//		boolean flag = false;
-//		try {
-//			con = pool.getConnection();
-//			sql = "select admin_id, admin_pwd from tblAdmin where admin_id = ? and admin_pwd = ?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, admin_id);
-//			pstmt.setString(2, admin_pwd);
-//			rs = pstmt.executeQuery();
-//			flag = rs.next();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			pool.freeConnection(con);
+	//
+//		//Admin Login
+//		public boolean adminCheck(String admin_id, String admin_pwd) {
+//			Connection con = null;
+//			PreparedStatement pstmt = null;
+//			ResultSet rs = null;
+//			String sql = null;
+//			boolean flag = false;
+//			try {
+//				con = pool.getConnection();
+//				sql = "select admin_id, admin_pwd from tblAdmin where admin_id = ? and admin_pwd = ?";
+//				pstmt = con.prepareStatement(sql);
+//				pstmt.setString(1, admin_id);
+//				pstmt.setString(2, admin_pwd);
+//				rs = pstmt.executeQuery();
+//				flag = rs.next();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			} finally {
+//				pool.freeConnection(con);
+//			}
+//			return flag;
 //		}
-//		return flag;
-//	}
-//	
-//	//Send id, pwd
-//	public void sendAccount(String id) {
-//		Member bean = getMember(id);
-//		String pwd = bean.getPwd();
-//		String title = "OOO.com¿¡¼­ ¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£ Àü¼ÛÇÕ´Ï´Ù.";
-//		String content = "<font color='red'><b>id : " + id; 
-//		content+= " / pwd : " + pwd+"</b></font>";
-//		String toEmail = bean.getEmail();
-//		MailSend.send(title, content, toEmail);
-//	}
+	//
+//		//Send id, pwd
+//		public void sendAccount(String id) {
+//			Member bean = getMember(id);
+//			String pwd = bean.getPwd();
+//			String title = "OOO.comì—ì„œ ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ ì „ì†¡í•©ë‹ˆë‹¤.";
+//			String content = "<font color='red'><b>id : " + id; 
+//			content+= " / pwd : " + pwd+"</b></font>";
+//			String toEmail = bean.getEmail();
+//			MailSend.send(title, content, toEmail);
+//		}
+
 }
-
-
-
-
-
-
-
